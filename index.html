@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banda Neira - Timur Nusantara</title>
+    <link rel="icon" type="image/x-icon" href="asset/Logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Custom transition for navbar background change */
+        .navbar-transition {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        video::-webkit-media-controls {
+            display: none;
+            /* Sembunyikan kontrol video */
+        }
+
+        .video-container:hover video::-webkit-media-controls {
+            display: block;
+            /* Tampilkan kontrol saat dihover */
+        }
+
+        /* Custom CSS untuk menyembunyikan scrollbar */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* Internet Explorer */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Modal alert -->
+    <div id="autoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999] hidden">
+        <div class="bg-white rounded-lg shadow-lg w-[90%] md:w-[500px] p-6 mx-auto">
+            <h2 class="text-xl font-bold mb-4">Welcome to Our Site</h2>
+            <p class="mb-4">Selamat Datang di Banda Neira - Jejak Sejarah dan Keindahan Nusantara.
+                Temukan pesona tak terlupakan dari pulau kecil dengan cerita besar. Dari kejayaan masa lalu hingga
+                panorama memukau, nikmati pengalaman wisata sejarah dan alam yang memikat hati.</p>
+                <p><span class="font-semibold text-[14px]">DISCLAIMER</span> <br>Website ini megandung audio yang otomatis berputar di latar belakang yang bisa menjadi sensasi tersendiri bagi anda, Enjoying..</p>
+            <button id="closeModal" class="bg-gray-800 text-white px-10 py-2 mt-5 rounded">Close</button>
+        </div>
+    </div>
+
+
+
+    <!-- Sticky Navbar -->
+    <header id="navbar" class="bg-transparent navbar-transition fixed gap-5 w-full top-0 z-50 py-2">
+        <div class="max-w-8xl mx-auto px-8 md:px-9 xl:px-0">
+            <div class=" flex justify-between items-center py-4 xl:mx-[80px] md:mx-[20px] sm:mx-[20px] ">
+                <div class="flex-shrink-0 ">
+                    <img src="asset/Logo.svg" alt="Logo" class="h-10" href="#home">
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Desktop Navbar -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-950 hover:text-gray-500">Beranda</a>
+                    <a href="#about" class="text-gray-950 hover:text-gray-500">Tentang</a>
+                    <a href="#services" class="text-gray-950 hover:text-gray-500">Galeri</a>
+                    <a href="#visual" class="text-gray-950 hover:text-gray-500">Visual</a>
+                    <a href="#testimoni" class="text-gray-950 hover:text-gray-500">Testimoni</a>
+                </nav>
+                <div class="hidden md:flex">
+                    <a id="get-started-btn" href="#" class="px-5 py-2 bg-black text-white rounded-full">Get Started</a>
+                </div>
+            </div>
+
+            <div id="video-modal" class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50">
+                <div class="bg-white p-4 rounded-lg w-11/12 md:w-3/4 lg:w-1/2 relative">
+                    <!-- Tambahkan relative di sini -->
+                    <h2 class="text-lg font-semibold mb-2 inline-block">Video Banda Neira</h2>
+                    <button id="close-modal" class="absolute top-2 right-2 text-xl text-gray-500 hover:text-gray-800">
+                        &times; <!-- Simbol silang -->
+                    </button>
+                    <div class="relative" style="padding-bottom: 56.25%; /* 16:9 Aspect Ratio */">
+                        <iframe id="video" class="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/Cl59Xj9MYNc?enablejsapi=1" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav id="mobile-menu" class="hidden md:hidden py-3 bg-white ">
+                <a href="#home" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Beranda</a>
+                <a href="#about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Tentang</a>
+                <a href="#services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Galeri</a>
+                <a href="#visual" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Visual</a>
+                <a href="#testimoni" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Testimoni</a>
+                <a href="https://www.youtube.com/embed/Cl59Xj9MYNc" target="_blank" id="get-started-btn"
+                    class="block px-4 py-2 mx-4 my-4 text-white bg-black text-center rounded-md">Get
+                    Started</a>
+            </nav>
+    </header>
+
+    <!-- Audio -->
+    <audio id="backgroundAudio" loop>
+        <source src="asset/Sampai Jadi Debu (Menampilkan Gardika Gigih) - Banda Neira (youtube).mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="px-[30px] md:px-[50px] xl:px-[80px] pt-[100px] pb-[20px] min-h-screen">
+        <div class="flex gap-x-[80px] flex-col xl:flex-row justify-between">
+            <div class="flex gap-[30px] w-full items-center">
+                <span class="font-medium">Maluku</span>
+                <div class="w-full bg-black h-[1px]"></div>
+                <span class="font-medium">Indonesia</span>
+            </div>
+
+            <h1 class="text-[32px] md:text-[48px] xl:text-[96px] min-w-fit font-semibold">Banda Neira</h1>
+        </div>
+        <div class="flex flex-col xl:flex-row justify-between gap-[15px] xl:gap-[30px]">
+            <div class="flex flex-col gap-y-10 xl:gap-y-0 justify-between max-w-none xl:max-w-[300px]">
+                <div class="space-y-2">
+                    <h2 class="text-[24px] md:text-[32px] font-medium leading-[38px] tracking-[-4%]">Kenapa Banda Neira?
+                    </h2>
+                    <p class="text-[16px]">Banda Neira, Menawarkan sejarah, alam, dan budaya yang memikat, menjadikannya
+                        destinasi wisata
+                        yang wajib dikunjungi.</p>
+                </div>
+                <img class="w-fit" src="./asset/orang.svg" alt="review">
+                <div class="flex items-center justify-between">
+                    <img src="./asset/arrow down-left.svg" alt="arrow">
+                    <div>
+                        <p class="text-[14px]"><span class="text-[16px] font-semibold block">Keindahan di</span>Timur
+                            Nusantara</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="./asset/image-hero.png"
+                    class="rounded-[12px] w-full object-cover object-top max-h-[300px] xl:max-h-none"
+                    alt="gambarbesar" />
+                <div class="flex absolute inset-0 p-5 w-full justify-between">
+                    <div class="flex gap-2.5 rounded-full h-fit p-2 pr-4 bg-white">
+                        <img src="./asset/rating-star.svg" class="w-7" alt="star">
+                        <p class="font-medium text-[14px]">4.5/5</p>
+                    </div>
+                    <div class="bg-white rounded-full h-fit p-2">
+                        <img src="./asset/arrow-right-up.svg" alt="arrow">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col justify-between gap-[30px]">
+                <img src="./asset/mini-hero.png" class="w-fit hidden xl:flex rounded-[12px]" alt="gambarkecil" />
+                <div class="flex flex-row xl:flex-row justify-between items-start xl:items-center">
+                    <h3 class="font-medium text-[24px] md:text-[40px] tracking-[-4%] w-fit">Tour</h3>
+                    <p class="text-[12px] md:text-[14px] tracking-[-1%] max-w-[180px]">Banda Neira, pulau di Maluku,
+                        memikat dengan sejarah, populer.</p>
+                </div>
+                <div class="flex justify-between items-center gap-[10px] w-full">
+                    <div class="rounded-full border-2 text-[10px] w-fit font-semibold border-black p-1.5">
+                        IND
+                    </div>
+                    <div class="w-full h-[1px] bg-black"></div>
+                    <span class="font-medium text-[16px] min-w-fit tracking-[-1%] md:text-[20px]">Banda Neira</span>
+                </div>
+            </div>
+        </div>
+        <div id="scrollPrompt"
+            class="fixed font-medium bottom-10 left-1/2 transform -translate-x-1/2 text-gray-950 bg-white px-4 py-2 rounded-lg shadow-lg">
+            Scroll ke bawah untuk melihat lebih lanjut
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="px-[30px] py-[30px] md:px-[50px] xl:px-[80px] lg:py[50px] min-h-screen">
+        <div class="flex gap-y-[20px] gap-x-[80px] flex-col xl:flex-row justify-between">
+            <div class="flex gap-[20px] w-full items-center">
+                <div class="rounded-full border-2 text-[10px] w-fit font-semibold border-black p-1.5 px-4">
+                    About
+                </div>
+                <div class="w-full h-[1.5px] rounded-full bg-black"></div>
+                <span class="font-medium text-[16px] min-w-fit tracking-[-1%] md:text-[20px]">Banda Neira</span>
+            </div>
+            <p class="text-[18px] md:text-[40px] xl:text-[48px] mb-[20px] min-w-fit font-semibold">Menjelajahi Sejarah
+                di BandaNeira</p>
+        </div>
+        <!-- Grid for images and text -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Left Column (Image and Description) -->
+            <div class="md:col-span-1">
+                <img src="asset/IMG-Left-About.png" alt="Banda Neira Image"
+                    class="rounded-lg w-full h-[200px] lg:h-[75%] object-cover mb-4 shadow-md hover-left-img" />
+            </div>
+
+            <!-- Right Column (Image and Description) -->
+            <div class="md:col-span-2">
+                <img src="asset/Img RCenter About.png" alt="Bawah Laut Banda Neira"
+                    class="rounded-lg w-full h-[200px] lg:h-[400px] object-cover mb-4 shadow-md hover-img" />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                    <!-- First Text Block -->
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mt-4 md:mt-[52px]">
+                            Warisan Kolonial dan Jejak Perlawanan di Banda Neira
+                        </h2>
+                        <p class="mt-2 text-gray-600">
+                            Banda Neira menyimpan peninggalan kolonial Belanda, dari Benteng Belgica hingga
+                            kisah perlawanan heroik Sultan Nuku dan Kapitan Pattimura. Sejarah perjuangan
+                            rakyatnya masih terasa di setiap sudut pulau.
+                        </p>
+                    </div>
+                    <!-- Second Text Block -->
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mt-4 md:mt-[52px]">
+                            Pesona Bawah Laut Banda Neira yang Memikat
+                        </h2>
+                        <p class="mt-2 text-gray-600">
+                            Banda Neira menawarkan keindahan bawah laut yang luar biasa, dengan terumbu karang
+                            yang memukau dan perairan jernih, menjadikannya destinasi favorit para penyelam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="services" class="px-[30px] py-[40px] md:px-[50px] xl:px-[80px]  min-h-screen">
+        <div class="flex gap-y-[20px] gap-x-[80px] flex-col xl:flex-row justify-between">
+            <div class="flex gap-[20px] w-full items-center">
+                <div class="rounded-full border-2 text-[10px] w-fit font-semibold border-black p-1.5 px-4">
+                    Galeri
+                </div>
+                <div class="w-full h-[1.5px] rounded-full bg-black"></div>
+                <span class="font-medium text-[16px] min-w-fit tracking-[-1%] md:text-[20px]">Banda Neira</span>
+            </div>
+            <p class="text-[18px] md:text-[36px] xl:text-[48px] mb-[20px] min-w-fit font-semibold">Pesona dan Sejarah
+                Banda Neira</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6">
+            <!-- Benteng Belgica -->
+            <div class="col-span-1 row-span-2 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-belgica')">
+                <img src="asset/benteng_belgica_di_banda_neira 1.svg" alt="Benteng Belgica"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg">
+                    Benteng Belgica
+                </div>
+            </div>
+            <!-- Istana Mini Banda Neira -->
+            <div class="col-span-1 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-istana')">
+                <img src="asset/istana.svg" alt="Istana Mini Banda Neira"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg">
+                    Istana Mini Banda Neira
+                </div>
+            </div>
+            <!-- Gunung Api Banda -->
+            <div class="col-span-1 md:col-span-2 row-span-1 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-gunung')">
+                <img src="asset/gunung-polos.svg" alt="Gunung Api Banda"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg">
+                    Gunung Api Banda
+                </div>
+            </div>
+            <!-- Benteng Nassau -->
+            <div class="col-span-1 row-span-2 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-benteng-nassau')">
+                <img src="asset/nasau-polos.svg" alt="Benteng Nassau"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg">
+                    Benteng Nassau
+                </div>
+            </div>
+            <!-- Rumah Pengasingan Bung Hatta -->
+            <div class="col-span-1 md:col-span-2 row-span-1 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-bung-hatta')">
+                <img src="asset/roemah.svg" alt="Rumah Pengasingan Bung Hatta"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-2xl">
+                    Rumah Pengasingan Bung Hatta
+                </div>
+            </div>
+            <!-- Laut Banda Neira -->
+            <div class="col-span-1 row-span-1 relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]"
+                onclick="openModal('modal-laut')">
+                <img src="asset/laut.svg" alt="Laut Banda Neira"
+                    class="w-full h-48 md:h-full object-cover rounded-lg" />
+                <div
+                    class="absolute inset-x-0 bottom-0 bg-black bg-opacity-50 text-white text-center py-2 rounded-b-lg">
+                    Laut Banda Neira
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modal template -->
+    <div id="modal-belgica" class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/benteng_belgica_di_banda_neira 1.svg" alt="Benteng Belgica"
+                class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Benteng Belgica</h2>
+            <p class="mb-4">
+                Benteng Belgica adalah peninggalan kolonial Belanda yang terletak di Banda Neira. Benteng
+                ini menyimpan banyak sejarah perjuangan rakyat melawan penjajahan.
+            </p>
+            <button onclick="closeModal('modal-belgica')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modal untuk Istana Mini Banda Neira -->
+    <div id="modal-istana" class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/istana.svg" alt="Istana Mini Banda Neira"
+                class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Istana Mini Banda Neira</h2>
+            <p class="mb-4">
+                Istana Mini Banda Neira merupakan peninggalan arsitektur kolonial Belanda yang digunakan
+                sebagai tempat tinggal pejabat kolonial.
+            </p>
+            <button onclick="closeModal('modal-istana')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Gunung Api Banda -->
+    <div id="modal-gunung" class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/gunung-polos.svg" alt="Gunung Api Banda" class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Gunung Api Banda</h2>
+            <p class="mb-4">
+                Gunung Api Banda adalah gunung berapi aktif yang menjadi salah satu ikon alam Banda Neira.
+                Keindahannya menarik banyak wisatawan.
+            </p>
+            <button onclick="closeModal('modal-gunung')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Benteng Nassau -->
+    <div id="modal-benteng-nassau"
+        class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/nasau-polos.svg" alt="Benteng Nassau" class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Benteng Nassau</h2>
+            <p class="mb-4">
+                Benteng Nassau merupakan benteng peninggalan Belanda yang dibangun untuk mengamankan
+                wilayah Banda dari serangan musuh.
+            </p>
+            <button onclick="closeModal('modal-benteng-nassau')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Rumah Pengasingan Bung Hatta -->
+    <div id="modal-bung-hatta"
+        class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/roemah.svg" alt="Rumah Pengasingan Bung Hatta"
+                class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Rumah Pengasingan Bung Hatta</h2>
+            <p class="mb-4">
+                Rumah ini merupakan tempat di mana Bung Hatta diasingkan oleh pemerintah kolonial Belanda
+                selama masa penjajahan.
+            </p>
+            <button onclick="closeModal('modal-bung-hatta')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Laut Banda Neira -->
+    <div id="modal-laut" class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 lg:p-8 w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+            <img src="asset/laut.svg" alt="Laut Banda Neira" class="w-full h-72 object-cover rounded-lg mb-4" />
+            <h2 class="text-2xl font-bold mb-4">Laut Banda Neira</h2>
+            <p class="mb-4">
+                Laut Banda Neira terkenal dengan keindahan bawah lautnya yang menjadi daya tarik bagi
+                wisatawan domestik maupun mancanegara.
+            </p>
+            <button onclick="closeModal('modal-laut')"
+                class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Visual Section -->
+    <section id="visual" class="px-[30px] py-[50px] md:px-[50px] xl:px-[80px] lg:pt-[100px] md:py-[50px] ">
+        <div class="flex gap-y-[20px] gap-x-[80px] flex-col xl:flex-row justify-between">
+            <div class="flex gap-[20px] w-full items-center">
+                <div class="rounded-full border-2 text-[10px] w-fit font-semibold border-black p-1.5 px-4">
+                    Visual
+                </div>
+                <div class="w-full h-[1.5px] rounded-full bg-black"></div>
+                <span class="font-medium text-[16px] min-w-fit tracking-[-1%] md:text-[20px]">Banda Neira</span>
+            </div>
+            <p class="text-[18px] md:text-[36px] xl:text-[48px] mb-[20px] min-w-fit font-semibold">Menikmati Pesona Yang
+                Memikat</p>
+        </div>
+
+        <div class="video-container m-0">
+            <video class="rounded-lg aspect-video lg:h-[100%] " autoplay muted controls loop>
+                <source src="asset/Banda-Neira.mp4" type="video/mp4" />
+            </video>
+        </div>
+    </section>
+
+    <!-- Testimoni -->
+    <section id="testimoni" class="px-[30px] md:px-[50px] xl:px-[80px] pt-[50px] md:py-[50px]">
+        <div class="flex gap-y-[20px] gap-x-[80px] flex-col xl:flex-row justify-between">
+            <div class="flex gap-[20px] w-full items-center">
+                <div class="rounded-full border-2 text-[10px] w-fit font-semibold border-black p-1.5 px-4">
+                    Testimoni
+                </div>
+                <div class="w-full h-[1.5px] rounded-full bg-black"></div>
+                <span class="font-medium text-[16px] min-w-fit tracking-[-1%] md:text-[20px]">Banda Neira</span>
+            </div>
+            <p class="text-[18px] md:text-[36px] xl:text-[48px] mb-[20px] min-w-fit font-semibold">Menikmati Pesona Yang
+                Memikat</p>
+        </div>
+
+        <div id="carousel" class="flex space-x-4 overflow-x-auto scroll-smooth scrollbar-hide">
+            <!-- Testimonial Card -->
+            <div
+                class="w-full flex flex-col justify-between sm:w-[476px] h-[210px] min-w-[80%] sm:min-w-[40%] p-4 bg-white rounded-lg shadow">
+                <div>
+                    <div class="text-gray-600 text-2xl mb-4">“</div>
+                    <p class="text-gray-600">
+                        Donec id egestas libero. Praesent aliquet ligula eget suscipit
+                        volutpat.
+                    </p>
+                </div>
+                <div class="flex items-center justify-between mt-auto">
+                    <span class="font-semibold">Kyara</span>
+                    <div class="text-yellow-400 flex">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Testimonial Cards -->
+            <div
+                class="w-full flex flex-col justify-between sm:w-[476px] h-[210px] min-w-[80%] sm:min-w-[40%] p-4 bg-white rounded-lg shadow">
+                <div>
+                    <div class="text-gray-600 text-2xl mb-4">“</div>
+                    <p class="text-gray-600">
+                        Aliquam erat volutpat. Vivamus luctus purus id mauris pharetra, id
+                        luctus velit iaculis.
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold">Alya</span>
+                    <div class="text-yellow-400 flex">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full flex flex-col justify-between sm:w-[476px] h-[210px] min-w-[80%] sm:min-w-[40%] p-4 bg-white rounded-lg shadow">
+                <div>
+                    <div class="text-gray-600 text-2xl mb-4">“</div>
+                    <p class="text-gray-600">
+                        Jangan mati sebelum ke banda neira.
+                    </p>
+                </div>
+                <div class="flex items-center mt-auto justify-between">
+                    <span class="font-semibold">Nadia</span>
+                    <div class="text-yellow-400 flex">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full flex flex-col justify-between sm:w-[476px] h-[210px] min-w-[80%] sm:min-w-[40%] p-4 bg-white rounded-lg shadow">
+                <div>
+                    <div class="text-gray-600 text-2xl mb-4">“</div>
+                    <p class="text-gray-600">
+                        Aenean efficitur imperdiet arcu, sed bibendum libero tincidunt eu.
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold">Siti</span>
+                    <div class="text-yellow-400 flex">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full flex flex-col justify-between sm:w-[476px] h-[210px] min-w-[80%] sm:min-w-[40%] p-4 bg-white rounded-lg shadow">
+                <div>
+                    <div class="text-gray-600 text-2xl mb-4">“</div>
+                    <p class="text-gray-600 mb-[50px]">
+                        Sed lacinia urna sed magna volutpat, in volutpat metus mollis.
+                    </p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold">Lia</span>
+                    <div class="text-yellow-400 flex">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Dots -->
+        <div id="dots" class="flex justify-center mt-4 space-x-2 mb-12"></div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer" class="px-[30px] py-[50px] md:px-[50px] xl:px-[40px] pt-[50px] md:py-[50px]">
+        <footer class="bg-black text-white py-12 mx-auto rounded-xl">
+            <div class="max-w-screen-xl mx-auto px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                    <!-- Footer Column 1 -->
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex flex-col items-start mr-5">
+                                <img src="asset/logo-putih.svg" alt="Logo Banda Neira" class="h-10 w-10 mb-2" />
+                                <h3 class="text-lg font-semibold">Banda Neira</h3>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-400 max-w-xs mb-6"> <!-- Increased margin-bottom here -->
+                            Banda Neira, keindahan Maluku penuh sejarah dan alam. Destinasi eksotis yang wajib
+                            dikunjungi.
+                        </p>
+                    </div>
+
+                    <!-- Footer Column 2 - Navlink -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigasi</h3>
+                        <ul>
+                            <li class="mb-2"><a href="#home" class="text-gray-400 hover:text-white">Beranda</a></li>
+                            <li class="mb-2"><a href="#about" class="text-gray-400 hover:text-white">Tentang</a></li>
+                            <li class="mb-2"><a href="#service" class="text-gray-400 hover:text-white">Galeri</a></li>
+                            <li class="mb-2"><a href="#visual" class="text-gray-400 hover:text-white">Visual</a></li>
+                            <li class="mb-2"><a href="#testimoni" class="text-gray-400 hover:text-white">Testimoni</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Footer Column 3 - General -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Social</h3>
+                        <ul>
+                            <li class="mb-2"><a href="www.instagram.com"
+                                    class="text-gray-400 hover:text-white">Instagram</a></li>
+                            <li class="mb-2"><a href="www.instagram.com"
+                                    class="text-gray-400 hover:text-white">Tiktok</a></li>
+                            <li class="mb-2"><a href="www.x.com" class="text-gray-400 hover:text-white">Twitter</a></li>
+                            <li class="mb-2"><a href="www.youtube.com"
+                                    class="text-gray-400 hover:text-white">Youtube</a></li>
+                            <li class="mb-2"><a href="www.threads.com"
+                                    class="text-gray-400 hover:text-white">Threads</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Footer Column 4 - Location -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Lokasi</h3>
+                        <p class="text-gray-400">Maluku, Indonesia</p>
+                        <a href="https://www.google.com/maps/place/banda+neira+location/data=!4m2!3m1!1s0x2d15860b887ac3ab:0x6d9d8565c44e2f07?sa=X&ved=1t:155783&ictx=111"
+                            class="text-gray-400 hover:text-white">Lihat di Google Maps</a>
+                    </div>
+                </div>
+
+                <!-- Footer Bottom -->
+                <div class="text-center text-gray-500 border-t border-gray-700 pt-6">
+                    <p>© 2024 Banda Neira. All Rights Reserved</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="src/script.js">
+
+    </script>
+</body>
+
+</html>

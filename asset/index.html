@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <!-- Link to Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 80px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .image-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+      }
+      .image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+      .image-card .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 0 0 0.5rem 0.5rem;
+        text-align: center;
+      }
+
+      /* Tambahkan gaya untuk video */
+      .video-container {
+            position: relative;
+            width: 70%; /* Ukuran lebar video */
+            margin: 0 auto; /* Memusatkan video */
+        }
+        video {
+            width: 100%; /* Menyesuaikan lebar video dengan kontainer */
+            border-radius: 0.5rem;
+            display: block; /* Menghilangkan spasi di bawah video */
+        }
+        video::-webkit-media-controls {
+            display: none; /* Sembunyikan kontrol video */
+        }
+        .video-container:hover video::-webkit-media-controls {
+            display: block; /* Tampilkan kontrol saat dihover */
+        }
+
+        #search-input:focus {
+         outline: none;
+          border-color: #000;
+        }
+        #search-results {
+        display: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .hover-image {
+    transition: background-image 0.3s ease-in-out;
+    background-image: url('image 12.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hover-image:hover {
+    content: url('gunung-hover.svg');
+}
+
+.hover-image-small {
+    transition: opacity 0.3s ease-in-out; /* Animasi transisi */
+}
+
+.hover-image-small:hover {
+    content: url('benteng-hover.svg'); /* Ganti gambar saat hover */
+    border-radius: 15px;
+}
+
+.hover-img {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-img:hover {
+  content: url('terumbu-hover.svg'); /* Ganti gambar saat di-hover */
+}
+
+.hover-left-img {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-left-img:hover {
+  content: url('left-hover.svg'); /* Ganti gambar saat di-hover */
+}
+
+
+    </style>
+  </head>
+  <body class= "bg-gray-100">
+    <!-- Navbar (now fixed) -->
+<header class="fixed w-full top-0 left-0 flex justify-between items-center p-2 bg-white shadow-md z-50">
+  <div class="logo pl-10">
+    <img src="Logo.svg" alt="Logo Banda Neira" class="h-10" />
+  </div>
+  <nav>
+    <ul class="flex space-x-5">
+      <li><a href="#home-section" class="text-gray-800 font-medium">Home</a></li>
+      <li><a href="#about-section" class="text-gray-800 font-medium">About</a></li>
+      <li><a href="#gallery-section" class="text-gray-800 font-medium">Gallery</a></li>
+      <li><a href="#fact-section" class="text-gray-800 font-medium">Shot</a></li>
+      <li><a href="#testi-section" class="text-gray-800 font-medium">Testimoni</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right flex items-center space-x-5 relative">
+    <div class="search flex items-center text-gray-800 text-lg cursor-pointer" id="search-container">
+      <span id="search-label">Search</span>
+      <img src="" alt="Search icon" class="w-4 h-4 ml-2" />
+    </div>
+    <input type="text" id="search-input" placeholder="Type to search..." 
+           class="hidden border rounded-lg py-1 px-2 absolute right-0 top-full mt-1 w-40" />
+    <div id="search-results" class="hidden absolute bg-white border rounded-lg mt-1 w-40 max-h-40 overflow-auto"></div>
+
+  </div>
+</header>
+
+
+    <!-- Main Content -->
+    <section id="home-section" class="container mx-auto mt-5 pt-20">
+      <div class="flex flex-col md:flex-row">
+        <div class="md:w-1/2 pl-10">
+          <div class="flex items-center mb-4">
+            <span style="color: black; font-weight: bold" class="text-sm">Maluku</span>
+            <div class="flex-grow border-t mx-4" style="border-color: black; border-width: 1px"></div>
+            <span style="color: black; font-weight: bold" class="text-sm">Indonesia</span>
+          </div>
+          <h1 class="text-[100px] font-bold text-gray-900 leading-tight whitespace-nowrap">
+            Banda Neira
+          </h1>
+        </div>
+        <div class="md:w-1/2 ml-60">
+          <p class="text-[15px] text-gray-700 mb-4">
+            Rasakan petualangan disurga<br />
+            tersembunyi yang jarang dijelajahi<br />
+            di Banda Neira.
+          </p>
+          <div class="mt-4 flex space-x-4">
+            <button class="px-6 py-3 bg-black text-white rounded-full font-medium">Get started</button>
+            <button class="flex items-center space-x-2">
+              <img src="play.svg" alt="Play icon" class="w-8 h-8" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex mt-10 pl-10">
+        <div class="w-1/2">
+          <h2 class="text-[32px] font-semibold text-gray-900">
+            Kenapa<br />
+            Banda Neira?
+          </h2>
+          <p class="mt-2 text-[16px] text-gray-700">
+            Banda Neira, pulau di Maluku,<br />
+            memikat dengan sejarah, alam, dan<br />
+            budaya unik, menjadi destinasi wisata<br />
+            populer yang harus kamu kunjungi.
+          </p>
+          <img src="orang.svg" alt="Frame Image" style="width: 291px; height: auto; padding-top: 100px;" />
+          <img src="arrow.svg" alt="Anjay Image" style="width: 305px; height: auto; padding-top: 100px;" />
+        </div>
+        <div class="w-1/2 flex justify-end relative">
+          <img src="rating.svg" alt="Rating" style="position: absolute; margin-right: 765px; margin-top: 26px; width: 101px; height: 42px;" />
+          <img src="Frame.svg" alt="arrow" style="position: absolute; margin-right: 300px; margin-top: 26px; width: 42px; height: 42px;">
+          
+          <img src="image 12.svg" alt="Banda Neira Image" class="hover-image" style="border-radius: 20px; width: 594px; height: 520px; margin-right: 20px;" />
+          <img src="image.svg" alt="Gambar Kecil" class="hover-image-small" style="position: absolute; margin-top: 5px; margin-right: 15px; width: 250px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" />
+          <div class="Frame self-stretch justify-start items-center gap-2 inline-flex">
+            <div class="Tour w-20 text-justify text-black text-3xl font-medium font-['Poppins']">Tour</div>
+            <div class="BandaNeiraPulauDiMalukuMemikatDenganSejarahPopuler w-44 h-16 text-black text-sm font-normal font-['Poppins']">
+                Banda Neira, pulau di Maluku, memikat dengan sejarah, populer.
+            </div>
+        </div>
+        
+          <div class="absolute bottom-0 right-10 flex items-center space-x-2 transform translate-x-4 pb-4">
+            <img src="indo.svg" alt="IND" class="w-6 h-6">
+            <div class="w-28 h-[1px] bg-black"></div>
+            <span class="text-sm font-semibold">Banda Neira</span>
+          </div>         
+        </div>
+      </div>
+    </section><br><br>
+
+    <!--Scroll up-->
+    <div class="flex flex-col justify-center items-center w-full">
+      <img id="scroll-icon" src="scroll.svg" alt="Scroll Icon" class="w-[24px] h-[18px] cursor-pointer">
+      <p id="scroll-text" class="text-gray-700 mt-2 cursor-pointer">Scroll up</p>
+    </div><br>
+    
+    
+    <!-- Section About Us -->
+    <!-- Section About Us -->
+<div id="about-section" class="max-w-7xl mx-auto p-6 ">
+  <!-- Row with button, text, and title -->
+  <div class="flex items-center mb-6 gap-[78px]">
+    <!-- Left Side (Button and Banda Neira) -->
+    <div class="flex items-center ml-[30px]">
+      <!-- Button "About" -->
+      <button class="border-2 border-black rounded-full px-4 py-1 text-sm font-semibold">
+        About
+      </button>
+
+      <!-- Line between button and text -->
+      <div class="border-t border-black flex-grow mx-4 w-[80px]"></div>
+
+      <!-- Text "Banda Neira" -->
+      <span class="text-black font-semibold text-lg">Banda Neira</span>
+    </div>
+
+    <!-- Right Side (Main Title) -->
+    <div class="flex-grow text-center"> <!-- Tambahkan text-center untuk memusatkan teks -->
+      <h1 class="text-4xl font-bold text-gray-800">Menjelajahi Sejarah di Banda Neira</h1> <!-- Ubah ukuran teks menjadi 5xl -->
+    </div>
+  </div>
+
+  <!-- Grid for images and text -->
+  <div class="grid grid-flow-col gap-[43px]">
+    <!-- Left Column (Image and Description) -->
+    <div class="row-span-2 ...">
+      <img
+        src="Img Left About.svg"
+        alt="Banda Neira Image"
+        class="rounded-lg w-[363px] h-[615px] object-cover mb-4 shadow-md hover-left-img"
+      />
+    </div>
+
+    <!-- Right Column (Image and Description) -->
+    <div class="col-span-2 ...">
+      <img
+        src="Img RCenter About.svg"
+        alt="Bawah Laut Banda Neira"
+        class="rounded-lg w-[875px] h-[320px] object-cover mb-4 shadow-md hover-img" 
+      />
+      <div class="col-span-1 grid grid-cols-2 gap-6">
+        <!-- First Text Block -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800 mt-[52px]">
+            Warisan Kolonial dan Jejak Perlawanan di Banda Neira
+          </h2>
+          <p class="mt-2 text-gray-600">
+            Banda Neira menyimpan peninggalan kolonial Belanda, dari Benteng Belgica hingga
+            kisah perlawanan heroik Sultan Nuku dan Kapitan Pattimura. Sejarah perjuangan
+            rakyatnya masih terasa di setiap sudut pulau.
+          </p>
+        </div>
+        <!-- Second Text Block -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800 mt-[52px]">
+            Pesona Bawah Laut Banda Neira yang Memikat
+          </h2>
+          <p class="mt-2 text-gray-600">
+            Banda Neira menawarkan keindahan bawah laut yang luar biasa, dengan terumbu karang
+            yang memukau dan perairan jernih, menjadikannya destinasi favorit para penyelam.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--page 3 -->
+<!-- Container for the grid -->
+<div id = "gallery-section" class="max-w-7xl mx-auto p-6">
+  <div class="flex items-center mb-6 gap-[78px]">
+    <!-- Left Side (Button and Banda Neira) -->
+    <div class="flex items-center">
+      <!-- Button "About" -->
+      <button class="border-2 border-black rounded-full px-4 py-1 text-sm font-semibold">
+        About
+      </button>
+
+      <!-- Line between button and text -->
+      <div class="border-t border-black flex-grow mx-4 w-[80px]"></div>
+
+      <!-- Text "Banda Neira" -->
+      <span class="text-black font-semibold text-lg">Banda Neira</span>
+    </div>
+
+    <!-- Right Side (Main Title) -->
+    <div class="flex-grow">
+      <h1 class="text-4xl font-bold text-gray-800">Pesona Dan Sejarah Banda Neira</h1>
+    </div>
+  </div>
+  <div class="grid grid-cols-4 grid-rows-2 gap-6">
+    <!-- Benteng Belgica -->
+    <div class="col-span-1 row-span-2 image-card">
+      <img src="benteng_belgica_di_banda_neira 1.svg" alt="Benteng Belgica" />
+      <div class="overlay">Benteng Belgica</div>
+    </div>
+    <!-- Istana Mini Banda Neira -->
+    <div class="col-span-3 row-span-1 image-card">
+      <img src="istana.svg" alt="Istana Mini Banda Neira" />
+      <div class="overlay">Istana Mini Banda Neira</div>
+    </div>
+    <!-- Gunung Api Banda -->
+    <div class="col-span-2 row-span-1 image-card">
+      <img src="gunung-polos.svg" alt="Gunung Api Banda" />
+      <div class="overlay">Gunung Api Banda</div>
+    </div>
+    <!-- Rumah Pengasingan Bung Hatta -->
+    <div class="col-span-1 row-span-2 image-card">
+      <img src="nasau-polos.svg" alt="Benteng Nassau" />
+      <div class="overlay">Benteng Nassau</div>
+    </div>
+    <!-- Laut Banda Neira -->
+    <div class="col-span-2 row-span-1 image-card">
+      <img src="roemah.svg" alt="Rumah Pengasingan Bung Hatta" />
+      <div class="overlay">Rumah Pengasingan Bung Hatta</div>
+    </div>
+    <!-- Benteng Nassau -->
+    <div class="col-span-1 row-span-1 image-card">
+      <img src="laut.svg" alt="Laut" />
+      <div class="overlay">Laut Banda Neira</div>
+    </div>
+  </div>
+</div> <br><br>
+
+<!--page 4-->
+<!-- Container untuk Fakta Banda Neira dan GETEWE -->
+<div id="fact-section" class="container mx-auto flex items-center justify-between px-4">
+        
+  <!-- Button Fakta Banda Neira di sisi kanan dengan ml-16 untuk menggeser -->
+  <div class="flex items-center space-x-3 ml-[140px]"> <!-- Menggunakan ml-16 untuk menggeser ke kanan -->
+      <button class="border border-black text-black px-4 py-1 text-sm rounded-full hover:bg-gray-200 transition duration-300">
+          Fakta
+      </button>
+
+      <!-- Line and Banda Neira text -->
+      <div class="flex items-center space-x-3">
+          <hr class="w-16 border-t border-black">
+          <span class="font-medium text-sm">Banda Neira</span>
+      </div>
+  </div>
+
+  <!-- Logo GETEWE di sisi kanan tetap dengan mr-24 -->
+  <span class="font-bold text-4xl text-black mr-10 pr-12 mr-24">Menikmati Pesona Yang Memikat</span>
+</div>
+<br>
+
+<!-- Video -->
+    <div class="video-container">
+        <video class="rounded-lg aspect-video" autoplay muted controls loop>
+            <source src="banda neira video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+<!-- Audio -->
+<audio class="hidden" autoplay loop src="Sampai Jadi Debu (Menampilkan Gardika Gigih) - Banda Neira (youtube).mp3"></audio>
+<br><br>
+<!-- Breadcrumb and Title -->
+<div class="max-w-5xl mx-auto p-6">
+  <div class="flex items-center mb-6 gap-[78px]">
+    <!-- Left Side (Button and Banda Neira) -->
+    <div class="flex items-center">
+      <!-- Button "About" -->
+      <button class="border-2 border-black rounded-full px-4 py-1 text-sm font-semibold">
+        Testimoni
+      </button>
+      <!-- Line between button and text -->
+      <div class="border-t border-black flex-grow mx-4 w-[80px]"></div>
+      <!-- Text "Banda Neira" -->
+      <span class="text-black font-semibold text-lg">Banda Neira</span>
+    </div>
+    <!-- Right Side (Main Title) -->
+    <div class="flex-grow">
+      <h1 class="text-3xl font-bold text-gray-800">Pendapat mereka tentang kami</h1>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial Carousel -->
+<div id="testi-section" class="max-w-5xl mx-auto">
+  <div id="carousel" class="flex space-x-4 overflow-x-auto scroll-smooth scrollbar-hide">
+    <!-- Testimonial Card -->
+    <div class="w-[476px] h-[210px] min-w-[40%] p-4 bg-white rounded-lg shadow">
+      <div class="text-gray-600 text-2xl mb-4">“</div>
+      <p class="text-gray-600 mb-[50px]">
+        Donec id egestas libero. Praesent aliquet ligula eget suscipit volutpat.
+      </p>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">Kyara</span>
+        <div class="text-yellow-400 flex">
+          <span>★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <!-- Additional Testimonial Cards -->
+    <div class="w-[476px] h-[210px] min-w-[40%] p-4 bg-white rounded-lg shadow">
+      <div class="text-gray-600 text-2xl mb-4">“</div>
+      <p class="text-gray-600 mb-[50px]">
+        Aliquam erat volutpat. Vivamus luctus purus id mauris pharetra, id luctus velit iaculis.
+      </p>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">Alya</span>
+        <div class="text-yellow-400 flex">
+          <span>★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-[476px] h-[210px] min-w-[40%] p-4 bg-white rounded-lg shadow">
+      <div class="text-gray-600 text-2xl mb-4">“</div>
+      <p class="text-gray-600 mb-[50px]">Jangan mati sebelum ke banda neira.</p>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">Nadia</span>
+        <div class="text-yellow-400 flex">
+          <span>★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-[476px] h-[210px] min-w-[40%] p-4 bg-white rounded-lg shadow">
+      <div class="text-gray-600 text-2xl mb-4">“</div>
+      <p class="text-gray-600 mb-[50px]">
+        Aenean efficitur imperdiet arcu, sed bibendum libero tincidunt eu.
+      </p>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">Siti</span>
+        <div class="text-yellow-400 flex">
+          <span>★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-[476px] h-[210px] min-w-[40%] p-4 bg-white rounded-lg shadow">
+      <div class="text-gray-600 text-2xl mb-4">“</div>
+      <p class="text-gray-600 mb-[50px]">
+        Sed lacinia urna sed magna volutpat, in volutpat metus mollis.
+      </p>
+      <div class="flex items-center justify-between">
+        <span class="font-semibold">Lia</span>
+        <div class="text-yellow-400 flex">
+          <span>★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Dots -->
+<div id="dots" class="flex justify-center mt-4 space-x-2 mb-12"></div>
+
+</div>
+
+
+<!-- Footer Section -->
+<footer class="bg-black text-white py-12 w-[95%] mx-auto rounded-xl">
+  <div class="px-6">
+      <div class="flex justify-between mb-8">
+          <!-- Footer Column 1 -->
+          <div>
+            <div class="flex items-center mb-4">
+              <div class="flex flex-col items-start mr-2">
+                  <img src="logo-putih.svg" alt="Logo Banda Neira" class="h-10 w-10 mb-2" />
+                  <h3 class="text-lg font-semibold">Banda Neira</h3>
+              </div>
+          </div>
+          
+              <p class="text-sm text-gray-400 max-w-xs">
+                  Banda Neira, keindahan Maluku penuh sejarah dan alam. Destinasi eksotis yang wajib dikunjungi.
+              </p>
+          </div>
+
+          <!-- Footer Column 2 - Navlink -->
+          <div>
+              <h3 class="text-lg font-semibold mb-4">Navlink</h3>
+              <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Beranda</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Tentang</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Galeri</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Shot</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Testimoni</a></li>
+              </ul>
+          </div>
+
+          <!-- Footer Column 3 - General -->
+          <div>
+              <h3 class="text-lg font-semibold mb-4">General</h3>
+              <ul>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Beranda</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Tentang</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Galeri</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Shot</a></li>
+                  <li class="mb-2"><a href="#" class="text-gray-400 hover:text-white">Testimoni</a></li>
+              </ul>
+          </div>
+
+          <!-- Footer Column 4 - Location -->
+          <div>
+              <h3 class="text-lg font-semibold mb-4">Lokasi</h3>
+              <p class="text-gray-400">Maluku, Indonesia</p>
+              <a href="https://www.google.com/maps/place/banda+neira+location/data=!4m2!3m1!1s0x2d15860b887ac3ab:0x6d9d8565c44e2f07?sa=X&ved=1t:155783&ictx=111" class="text-gray-400 hover:text-white">Lihat di Google Maps</a>
+          </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center text-gray-500 border-t border-gray-700 pt-6">
+          <p>© 2024 Banda Neira. All Rights Reserved</p>
+      </div>
+  </div>
+</footer>
+
+<br><br>
+    
+    
+  </body>
+  <script>
+  document.getElementById('scroll-icon').addEventListener('click', function() {
+    document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('scroll-text').addEventListener('click', function() {
+    document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  //untuk carousel
+  const carousel = document.getElementById('carousel');
+      const dotsContainer = document.getElementById('dots');
+      const cardCount = carousel.children.length;
+      const cardWidth = carousel.scrollWidth / cardCount;
+      let currentIndex = 0;
+
+      // Create and append the correct number of dots based on card count
+      for (let i = 0; i < cardCount; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add(
+          'dot',
+          'block',
+          'w-2',
+          'h-2',
+          'rounded-full',
+          'cursor-pointer',
+          'transition-all',
+          'duration-300'
+        );
+        dot.setAttribute('data-index', i);
+        dot.classList.add(i === 0 ? 'bg-gray-800' : 'bg-gray-300');
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = document.querySelectorAll('.dot');
+
+      function updateDots(activeIndex) {
+        dots.forEach((dot, index) => {
+          dot.classList.remove('bg-gray-800', 'w-8');
+          dot.classList.add('bg-gray-300', 'w-2');
+          if (index === activeIndex) {
+            dot.classList.add('bg-gray-800', 'w-8');
+            dot.classList.remove('bg-gray-300');
+          }
+        });
+      }
+
+      function scrollToCard(index) {
+        carousel.scrollTo({
+          left: index * cardWidth,
+          behavior: 'smooth',
+        });
+        currentIndex = index;
+        updateDots(index);
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+          const index = Number(e.target.getAttribute('data-index'));
+          scrollToCard(index);
+        });
+      });
+
+      carousel.addEventListener('scroll', () => {
+        const index = Math.round(carousel.scrollLeft / cardWidth);
+        updateDots(index);
+      });
+
+      updateDots(0);
+
+  </script>
+</html>
